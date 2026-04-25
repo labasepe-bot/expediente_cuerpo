@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expedientes del Cuerpo - Programa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=League+Gothic&family=Montserrat:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #838997;
+      --green: #7a9632;
+      --panel: #6e7590;
+      --text: #000000;
+      --navy: #041b36;
+      --line: rgba(0,0,0,.28);
+      --white-soft: rgba(255,255,255,.94);
+      --white-mid: rgba(255,255,255,.8);
+      --white-low: rgba(255,255,255,.66);
+      --accent: #e1b14f;
+      --shadow: 0 14px 34px rgba(0,0,0,.12);
+      --shadow-hover: 0 22px 48px rgba(0,0,0,.18);
+      --radius: 30px;
+      --danger: #ffb5b5;
+      --whatsapp: #25D366;
+      --soft-card: rgba(255,255,255,.06);
+      --soft-border: rgba(255,255,255,.1);
+      --ok-bg: rgba(143,207,111,.13);
+      --ok-border: rgba(143,207,111,.45);
+      --warn-bg: rgba(225,177,79,.11);
+      --warn-border: rgba(225,177,79,.42);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width:100%; overflow-x:hidden; }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      background: var(--bg);
+      padding: 28px;
+      font-family: Arial, sans-serif;
+    }
+
+    .stack{
+      width:min(1680px, 100%);
+    }
+
+    .page-header{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      color:var(--navy);
+      padding: 18px 0 54px;
+    }
+
+    .ornament{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      width:100%;
+      margin: 0 auto 26px;
+    }
+
+    .ornament-line{
+      width: clamp(76px, 14vw, 146px);
+      height: 3px;
+      background: var(--accent);
+      border-radius: 999px;
+      opacity: .95;
+    }
+
+    .ornament-diamond{
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      transform: rotate(45deg);
+      border-radius: 1px;
+      flex: 0 0 auto;
+    }
+
+    .festival-title{
+      margin: 0;
+      text-transform: uppercase;
+      color: var(--navy);
+      line-height: .84;
+    }
+
+    .festival-title-top{
+      display:block;
+      font-family: "League Gothic", sans-serif;
+      font-size: clamp(72px, 10vw, 170px);
+      letter-spacing: .02em;
+      font-weight: 400;
+    }
+
+    .festival-title-bottom{
+      display:block;
+      font-family: "League Gothic", sans-serif;
+      font-size: clamp(175px, 24vw, 430px);
+      letter-spacing: .015em;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+
+    .festival-divider{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      width:100%;
+      margin: 18px 0 18px;
+    }
+
+    .festival-divider .ornament-line{
+      width: min(100%, 740px);
+      height: 3px;
+    }
+
+    .festival-divider .ornament-diamond{
+      width: 20px;
+      height: 20px;
+    }
+
+    .festival-subtitle{
+      margin: 0;
+      font-family: "Barlow Condensed", sans-serif;
+      color: var(--navy);
+      font-size: clamp(28px, 3vw, 54px);
+      letter-spacing: .03em;
+      line-height: 1.05;
+      font-weight: 500;
+    }
+
+    .festival-short-line{
+      width: clamp(84px, 9vw, 130px);
+      height: 4px;
+      background: var(--accent);
+      border-radius: 999px;
+      margin: 26px 0 28px;
+    }
+
+    .festival-date{
+      margin: 0 0 6px;
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      color: var(--navy);
+      font-size: clamp(54px, 6vw, 110px);
+      letter-spacing: .035em;
+      line-height: .95;
+      font-weight: 700;
+    }
+
+    .festival-venue{
+      margin: 0 0 34px;
+      font-family: "Barlow Condensed", sans-serif;
+      color: var(--navy);
+      font-size: clamp(36px, 4vw, 76px);
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+
+    .program-heading{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:22px;
+      width:100%;
+      margin-top: 6px;
+    }
+
+    .program-heading-line{
+      width: clamp(90px, 11vw, 156px);
+      height: 3px;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    .program-heading-text{
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      color: var(--navy);
+      font-size: clamp(32px, 3.1vw, 60px);
+      letter-spacing: .28em;
+      line-height: 1;
+      font-weight: 600;
+      padding-left: .28em;
+    }
+
+    .days-list{
+      display:grid;
+      gap: 30px;
+    }
+
+    .accordion{
+      width:100%;
+    }
+
+    .event-button{
+      width:100%;
+      border:none;
+      padding:0;
+      background:transparent;
+      cursor:pointer;
+      display:block;
+    }
+
+    .event-button-inner{
+      display:grid;
+      grid-template-columns: 19.5% 1fr;
+      width:100%;
+      min-height: 455px;
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      transition: transform .24s ease, box-shadow .24s ease, filter .24s ease;
+      position:relative;
+    }
+
+    .event-button:hover .event-button-inner{
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      filter: saturate(1.03);
+    }
+
+    .event-button:active .event-button-inner{
+      transform: translateY(-1px);
+    }
+
+    .media-panel{
+      position: relative;
+      background: url("la-base-vertical.png") center center / cover no-repeat;
+      min-width: 0;
+      filter: saturate(1.02) contrast(1.02);
+    }
+
+    .content-panel{
+      position:relative;
+      background: var(--green);
+      display:grid;
+      grid-template-columns: 58% 42%;
+      min-width:0;
+    }
+
+    .left-content{
+      padding: 6.8% 3.4% 6.2% 3.9%;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      align-items:flex-start;
+      color:var(--text);
+      min-width:0;
+    }
+
+    .tagline{
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.005em;
+      font-size: clamp(21px, 2.45vw, 46px);
+      line-height:.92;
+      margin:0 0 4.2% 0;
+    }
+
+    .type{
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.002em;
+      font-size: clamp(32px, 3.45vw, 70px);
+      line-height:.90;
+      margin:0 0 5.3% 0;
+    }
+
+    .title{
+      font-family: "League Gothic", sans-serif;
+      font-weight:400;
+      color:var(--text);
+      font-size: clamp(110px, 11vw, 245px);
+      line-height:.80;
+      letter-spacing: .005em;
+      margin:0;
+      text-transform:uppercase;
+      text-align:left;
+    }
+
+    .title .quotes{
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight:700;
+      font-size: .62em;
+      vertical-align: top;
+      margin-right: .02em;
+    }
+
+    .right-content{
+      position:relative;
+      padding: 7.5% 7.4% 7.2% 6.6%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      color:var(--text);
+      min-width:0;
+    }
+
+    .right-content::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:15%;
+      bottom:15%;
+      width:2px;
+      background: var(--line);
+    }
+
+    .date{
+      font-family: "League Gothic", sans-serif;
+      font-weight:400;
+      font-size: clamp(72px, 9vw, 176px);
+      line-height:.82;
+      letter-spacing:.01em;
+      margin:0 0 6.5% 0;
+      text-transform:uppercase;
+    }
+
+    .date-line{
+      width: 74%;
+      height: 2px;
+      background: var(--line);
+      margin-bottom: 7.4%;
+    }
+
+    .city{
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing: .06em;
+      font-size: clamp(24px, 2.7vw, 52px);
+      line-height:1;
+      margin:0 0 3.4% 0;
+    }
+
+    .venue{
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing: .12em;
+      font-size: clamp(12px, 1.15vw, 24px);
+      line-height:1;
+      color: var(--white-soft);
+      margin:0;
+      text-align:center;
+      white-space:nowrap;
+    }
+
+    .chevron{
+      position:absolute;
+      right: 24px;
+      bottom: 22px;
+      width: 18px;
+      height: 18px;
+      border-right: 3px solid rgba(0,0,0,.58);
+      border-bottom: 3px solid rgba(0,0,0,.58);
+      transform: rotate(45deg);
+      transition: transform .55s ease, opacity .42s ease;
+      opacity: .82;
+      pointer-events:none;
+    }
+
+    .accordion.open .chevron{
+      transform: rotate(-135deg) translate(-2px, -2px);
+    }
+
+    .dropdown{
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition:
+        max-height 1.15s cubic-bezier(.23,.79,.24,1),
+        opacity .65s ease,
+        transform .65s ease;
+    }
+
+    .accordion.open .dropdown{
+      max-height: 9000px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .dropdown-inner{
+      background:
+        linear-gradient(rgba(102,110,137,.9), rgba(102,110,137,.9)),
+        radial-gradient(circle at 18% 68%, rgba(255,255,255,.09) 0 16%, transparent 17%),
+        radial-gradient(circle at 72% 22%, rgba(255,255,255,.06) 0 10%, transparent 11%),
+        radial-gradient(circle at 46% 44%, rgba(255,255,255,.05) 0 18%, transparent 19%),
+        linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+      border-radius: 0 0 34px 34px;
+      box-shadow: var(--shadow);
+      padding: 0;
+      color: white;
+      overflow: hidden;
+    }
+
+    .program-shell{
+      display:grid;
+      grid-template-columns: 1fr;
+    }
+
+    .program-row{
+      display:grid;
+      grid-template-columns: 180px 1fr 300px;
+      gap: 26px;
+      padding: 30px 34px;
+      align-items:start;
+      position:relative;
+      background: transparent;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      width: 100%;
+      text-align: left;
+      color: inherit;
+      cursor: pointer;
+      transition: background-color .25s ease, box-shadow .2s ease;
+    }
+
+    .program-row:last-child{
+      border-bottom: none;
+    }
+
+    .program-row:hover{
+      background: rgba(255,255,255,.03);
+    }
+
+    .program-row.selected{
+      background: rgba(225,177,79,.12);
+      box-shadow: inset 0 0 0 1px rgba(225,177,79,.35);
+    }
+
+    .time-col{
+      color: var(--accent);
+      font-family: "League Gothic", sans-serif;
+      font-size: clamp(46px, 3.9vw, 78px);
+      line-height:.88;
+      letter-spacing:.01em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      text-shadow: 0 2px 4px rgba(0,0,0,.18);
+    }
+
+    .main-col{
+      min-width:0;
+    }
+
+    .label{
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight:700;
+      text-transform:uppercase;
+      font-size: clamp(22px, 1.45vw, 30px);
+      line-height:1;
+      letter-spacing:.03em;
+      color: rgba(255,255,255,.96);
+      margin-bottom: 10px;
+    }
+
+    .activity{
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight:700;
+      color: white;
+      font-size: clamp(34px, 2.8vw, 60px);
+      line-height:1.02;
+      margin:0 0 10px 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,.16);
+    }
+
+    .activity.feature{
+      color: var(--accent);
+    }
+
+    .credit{
+      font-family: Arial, sans-serif;
+      font-style: italic;
+      color: var(--white-mid);
+      font-size: clamp(18px, 1.15vw, 26px);
+      line-height:1.28;
+    }
+
+    .credit.strong{
+      font-style: normal;
+      color: rgba(255,255,255,.92);
+      font-size: clamp(17px, 1.1vw, 24px);
+    }
+
+    .place-col{
+      border-left: 2px solid rgba(225,177,79,.5);
+      padding-left: 30px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-height: 100%;
+      color: rgba(255,255,255,.96);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: clamp(28px, 2vw, 42px);
+      line-height:1.06;
+      text-align:left;
+      position:relative;
+    }
+
+    .click-hint{
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(225,177,79,.14);
+      border: 1px solid rgba(225,177,79,.28);
+      color: #fff8e8;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      flex-wrap: wrap;
+    }
+
+    .click-hint .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(225,177,79,.14);
+      flex: 0 0 auto;
+    }
+
+    .registration-zone{
+      padding: 26px 34px 34px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.025);
+    }
+
+    .selection-status{
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      color: #edf3ff;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      font-size: 15px;
+    }
+
+    .selection-status.warn{
+      background: var(--warn-bg);
+      border-color: var(--warn-border);
+      color: #fff6de;
+    }
+
+    .selection-title{
+      margin: 0 0 12px;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: clamp(24px, 1.8vw, 40px);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .selection-list{
+      display:grid;
+      gap:10px;
+      margin-bottom: 18px;
+    }
+
+    .selection-item{
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .selection-item-top{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      align-items:center;
+      margin-bottom: 5px;
+    }
+
+    .selection-time{
+      font-family: "League Gothic", sans-serif;
+      color: var(--accent);
+      font-size: 28px;
+      line-height: .9;
+      letter-spacing: .01em;
+    }
+
+    .selection-kind{
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-size: 15px;
+      color: rgba(255,255,255,.76);
+    }
+
+    .selection-name{
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 26px;
+      line-height: 1.03;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .selection-place{
+      font-size: 14px;
+      color: rgba(255,255,255,.75);
+      margin-top: 6px;
+    }
+
+    .row-panel-note{
+      color: var(--white-mid);
+      font-size: 15px;
+      line-height: 1.45;
+      margin: -4px 0 18px;
+    }
+
+    .info-cards{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 0 0 18px;
+    }
+
+    .info-card{
+      background: var(--soft-card);
+      border: 1px solid var(--soft-border);
+      border-radius: 18px;
+      padding: 16px 16px 15px;
+    }
+
+    .info-card-label{
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-size: 16px;
+      color: rgba(255,255,255,.75);
+      margin-bottom: 8px;
+    }
+
+    .info-card-value{
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1.25;
+      color: #fff;
+    }
+
+    .price-options{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .price-option{
+      position:relative;
+    }
+
+    .price-option input{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .price-option label{
+      display:block;
+      width:100%;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(15,23,42,.26);
+      color:#fff;
+      border-radius: 18px;
+      padding: 16px 16px 15px;
+      cursor:pointer;
+      transition: border-color .2s ease, background-color .2s ease, transform .15s ease, box-shadow .2s ease;
+    }
+
+    .price-option label:hover{
+      transform: translateY(-1px);
+      border-color: rgba(225,177,79,.45);
+    }
+
+    .price-option input:checked + label{
+      border-color: rgba(225,177,79,.8);
+      background: rgba(225,177,79,.14);
+      box-shadow: 0 0 0 3px rgba(225,177,79,.12);
+    }
+
+    .price-option-title{
+      font-family:"Barlow Condensed", sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      font-size:20px;
+      color:#fff;
+      margin-bottom:8px;
+    }
+
+    .price-option-price{
+      font-family:"Poppins", sans-serif;
+      font-weight:800;
+      font-size:28px;
+      color: #f9df9a;
+      line-height:1;
+      margin-bottom:6px;
+    }
+
+    .price-option-note{
+      font-size:13px;
+      color: rgba(255,255,255,.72);
+      line-height:1.35;
+    }
+
+    .form-grid{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field{
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full{
+      grid-column: 1 / -1;
+    }
+
+    .field label{
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: 18px;
+      color: rgba(255,255,255,.96);
+    }
+
+    .field .req{
+      color: var(--accent);
+    }
+
+    .field input{
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(15,23,42,.32);
+      color: #fff;
+      border-radius: 14px;
+      padding: 15px 16px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+
+    .field input:focus{
+      border-color: rgba(225,177,79,.8);
+      box-shadow: 0 0 0 3px rgba(225,177,79,.16);
+      background: rgba(15,23,42,.45);
+    }
+
+    .form-actions{
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-whatsapp{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 16px;
+      padding: 16px 22px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: 22px;
+      width: 100%;
+    }
+
+    .btn-primary{
+      background: var(--accent);
+      color: #111;
+      box-shadow: 0 8px 22px rgba(0,0,0,.14);
+    }
+
+    .btn-secondary{
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 8px 22px rgba(0,0,0,.08);
+    }
+
+    .btn-whatsapp{
+      background: var(--whatsapp);
+      color: #0d2316;
+      box-shadow: 0 8px 22px rgba(0,0,0,.14);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-whatsapp:hover{
+      transform: translateY(-1px);
+      filter: saturate(1.04);
+    }
+
+    .btn-whatsapp svg{
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      flex: 0 0 auto;
+    }
+
+    .result-box{
+      display:none;
+      margin-top: 16px;
+      border-radius: 14px;
+      padding: 14px 16px;
+      line-height: 1.45;
+      font-size: 15px;
+    }
+
+    .result-box.show{
+      display:block;
+    }
+
+    .result-box.ok{
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+      color: #eaf8df;
+    }
+
+    .result-box.error{
+      background: rgba(255,181,181,.09);
+      border: 1px solid rgba(255,181,181,.3);
+      color: #ffe6e6;
+    }
+
+    .registration-code{
+      display:inline-block;
+      margin-top: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(225,177,79,.14);
+      border: 1px solid rgba(225,177,79,.34);
+      color: #fff7e2;
+      font-family: "Barlow Condensed", sans-serif;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+
+    .ticket-preview-wrap{
+      margin-top: 18px;
+      display:none;
+      gap:16px;
+      align-items:flex-start;
+      flex-direction:column;
+    }
+
+    .ticket-preview-wrap.show{
+      display:flex;
+    }
+
+    .ticket-preview-card{
+      width:min(100%, 620px);
+      background: linear-gradient(180deg, #0f1524 0%, #121d32 100%);
+      border: 1px solid rgba(225,177,79,.28);
+      border-radius: 22px;
+      box-shadow: 0 16px 34px rgba(0,0,0,.18);
+      overflow: hidden;
+      color:#fff;
+    }
+
+    .ticket-preview-top{
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.08)),
+        linear-gradient(90deg, #7a9632 0%, #87a835 100%);
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .ticket-preview-kicker{
+      font-family:"Barlow Condensed", sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:14px;
+      color:#f7e9bf;
+      margin-bottom:8px;
+    }
+
+    .ticket-preview-title{
+      font-family:"Poppins", sans-serif;
+      font-weight:800;
+      font-size:26px;
+      line-height:1.05;
+      color:#101010;
+      margin:0;
+    }
+
+    .ticket-preview-body{
+      padding: 18px 20px 20px;
+      background:
+        radial-gradient(circle at top right, rgba(225,177,79,.12), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,.015), rgba(255,255,255,.005));
+    }
+
+    .ticket-preview-pass{
+      display:inline-block;
+      background: rgba(225,177,79,.12);
+      border:1px solid rgba(225,177,79,.24);
+      color:#f7e9bf;
+      border-radius:999px;
+      padding:8px 12px;
+      font-family:"Barlow Condensed", sans-serif;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size:16px;
+      margin-bottom:14px;
+    }
+
+    .ticket-preview-name{
+      font-family:"Poppins", sans-serif;
+      font-weight:800;
+      font-size:28px;
+      line-height:1.05;
+      margin:0 0 14px;
+      color:#fff;
+      word-break:break-word;
+    }
+
+    .ticket-preview-events{
+      display:grid;
+      gap:10px;
+      margin-top: 14px;
+    }
+
+    .ticket-preview-event{
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+
+    .ticket-preview-event-time{
+      font-family:"League Gothic", sans-serif;
+      color: var(--accent);
+      font-size:22px;
+      line-height: .9;
+      margin-bottom:4px;
+    }
+
+    .ticket-preview-event-name{
+      font-family:"Barlow Condensed", sans-serif;
+      color:#fff;
+      font-size:22px;
+      line-height:1.05;
+      text-transform:uppercase;
+    }
+
+    .ticket-preview-event-place{
+      color: rgba(255,255,255,.74);
+      font-size:13px;
+      margin-top:4px;
+    }
+
+    .ticket-preview-meta{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .ticket-meta-box{
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      padding:12px 13px;
+    }
+
+    .ticket-meta-label{
+      font-family:"Barlow Condensed", sans-serif;
+      font-size:14px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.7);
+      margin-bottom:6px;
+    }
+
+    .ticket-meta-value{
+      font-family:"Montserrat", sans-serif;
+      font-size:15px;
+      line-height:1.3;
+      color:#fff;
+      font-weight:600;
+    }
+
+    @media (max-width: 1100px){
+      body{ padding: 18px; }
+      .page-header{ padding: 10px 0 42px; }
+      .event-button-inner{ min-height: 340px; }
+      .program-row{
+        grid-template-columns: 150px 1fr 200px;
+        padding: 22px 22px;
+      }
+    }
+
+    @media (max-width: 700px){
+      body{ padding: 14px; }
+      .stack{ width: 100%; }
+
+      .page-header{ padding: 8px 0 34px; }
+      .ornament{ gap: 12px; margin-bottom: 18px; }
+      .ornament-line{ height: 2px; }
+      .ornament-diamond{ width: 14px; height: 14px; }
+      .festival-divider{ gap: 12px; margin: 14px 0 14px; }
+      .festival-divider .ornament-diamond{ width: 14px; height: 14px; }
+      .festival-short-line{ height: 3px; margin: 18px 0 18px; }
+      .festival-venue{ margin-bottom: 24px; }
+      .program-heading{ gap: 14px; }
+      .program-heading-text{ letter-spacing: .2em; padding-left: .2em; }
+
+      .event-button-inner{
+        grid-template-columns: 155px 1fr;
+        min-height: 240px;
+        border-radius: 22px;
+      }
+
+      .content-panel{ grid-template-columns: 58% 42%; }
+      .media-panel{ min-height: 240px; }
+      .left-content{ padding: 16px 12px 14px 16px; }
+      .tagline{ font-size: 18px; margin: 0 0 10px 0; }
+      .type{ font-size: 25px; margin: 0 0 12px 0; }
+      .title{ font-size: 78px; line-height: .82; }
+      .right-content{ padding: 18px 16px 28px 16px; }
+      .right-content::before{
+        left: 0; top: 14%; bottom: 14%; width: 2px; height: auto;
+      }
+      .date{ font-size: 88px; margin: 0 0 12px 0; }
+      .date-line{ width: 82%; margin-bottom: 12px; }
+      .city{ font-size: 28px; margin: 0 0 8px 0; }
+      .venue{ font-size: 12px; letter-spacing: .08em; white-space: nowrap; }
+      .chevron{ right: 16px; bottom: 14px; width: 14px; height: 14px; }
+
+      .program-row{
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 18px 16px;
+      }
+
+      .time-col{ font-size: 48px; }
+      .label{ font-size: 17px; margin-bottom: 8px; }
+      .activity{ font-size: 28px; }
+      .credit, .credit.strong{ font-size: 15px; line-height: 1.35; }
+
+      .place-col{
+        border-left: none;
+        border-top: 1px solid rgba(225,177,79,.42);
+        padding-left: 0;
+        padding-top: 12px;
+        font-size: 22px;
+      }
+
+      .registration-zone{
+        padding: 18px 16px 22px;
+      }
+
+      .form-grid,
+      .info-cards,
+      .price-options,
+      .ticket-preview-meta{
+        grid-template-columns: 1fr;
+      }
+
+      .btn-primary,
+      .btn-secondary,
+      .btn-whatsapp{
+        font-size: 19px;
+        padding: 15px 18px;
+      }
+
+      .click-hint{
+        font-size: 15px;
+        padding: 8px 12px;
+      }
+    }
+
+    @media (max-width: 430px){
+      .festival-title-top{ letter-spacing: .01em; }
+      .festival-title-bottom{ letter-spacing: .01em; }
+      .program-heading-text{ letter-spacing: .16em; padding-left: .16em; }
+
+      .event-button-inner{
+        grid-template-columns: 122px 1fr;
+        min-height: 200px;
+      }
+
+      .media-panel{ min-height: 200px; }
+      .left-content{ padding: 14px 10px 12px 12px; }
+      .tagline{ font-size: 15px; margin-bottom: 8px; }
+      .type{ font-size: 21px; margin-bottom: 10px; }
+      .title{ font-size: 62px; }
+      .right-content{ padding: 14px 12px 24px 12px; }
+      .date{ font-size: 70px; margin-bottom: 10px; }
+      .date-line{ margin-bottom: 10px; }
+      .city{ font-size: 22px; margin-bottom: 6px; }
+      .venue{ font-size: 10px; letter-spacing: .07em; }
+      .time-col{ font-size: 40px; }
+      .activity{ font-size: 24px; }
+      .place-col{ font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stack">
+    <section class="page-header">
+      <div class="ornament">
+        <span class="ornament-line"></span>
+        <span class="ornament-diamond"></span>
+        <span class="ornament-line"></span>
+      </div>
+
+      <h1 class="festival-title">
+        <span class="festival-title-top">EXPEDIENTES DEL</span>
+        <span class="festival-title-bottom">CUERPO</span>
+      </h1>
+
+      <div class="festival-divider">
+        <span class="ornament-line"></span>
+        <span class="ornament-diamond"></span>
+        <span class="ornament-line"></span>
+      </div>
+
+      <p class="festival-subtitle">I Ciclo teatral • Archivo escénico vivo</p>
+
+      <div class="festival-short-line"></div>
+
+      <h2 class="festival-date">24—29 DE ABRIL</h2>
+      <p class="festival-venue">Teatrín de la DDC</p>
+
+      <div class="program-heading">
+        <span class="program-heading-line"></span>
+        <span class="program-heading-text">PROGRAMA</span>
+        <span class="program-heading-line"></span>
+      </div>
+    </section>
+
+    <div class="days-list" id="daysList"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script>
+    const GOOGLE_SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
+    const WHATSAPP_BASE_URL = 'https://wa.me/51997128075';
+    const YAPE_NUMBER = '959870977';
+    const YAPE_NAME = 'Elizabeth Salinas Bernuy';
+
+    const daysData = [
+      {
+        date: '24/04',
+        city: 'HUARAZ',
+        venueShort: 'PZA DE ARMAS | DDC',
+        tagline: 'TALLERES | PONENCIAS',
+        type: 'OBRA DE TEATRO',
+        title: 'TURNO',
+        events: [
+          {
+            id: '24-free-1700',
+            time: '5:00 PM',
+            kind: 'INAUGURACIÓN DEL CICLO',
+            title: 'Creación Colectiva: Muero, luego existo',
+            credit: '',
+            place: 'Plaza de Armas - Huaraz',
+            mode: 'free'
+          },
+          {
+            id: '24-paid-1930',
+            time: '7:30 PM',
+            kind: 'OBRA DE TEATRO',
+            title: '“TURNO”',
+            credit: 'por Gabriela del Pilar<br>+ Conversatorio',
+            place: 'Teatrín de la DDC',
+            mode: 'paid'
+          }
+        ]
+      },
+      {
+        date: '25/04',
+        city: 'HUARAZ',
+        venueShort: 'LA BASE | DDC',
+        tagline: 'TALLERES | PONENCIAS',
+        type: 'OBRA DE TEATRO',
+        title: 'LOS ZORROS',
+        events: [
+          {
+            id: '25-free-1000',
+            time: '10:00 AM',
+            kind: 'TALLER GRATUITO',
+            title: '“Descubre tu movimiento y empieza a crear”',
+            credit: 'por Gabriela del Pilar',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '25-free-1400',
+            time: '2:00 PM',
+            kind: 'TALLER GRATUITO',
+            title: '“Laboratorio de composición escénica I”',
+            credit: 'por Valery Arana',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '25-free-1700',
+            time: '5:00 PM',
+            kind: 'DESMONTAJE GRATUITO',
+            title: '“Turno”',
+            credit: 'por Gabriela del Pilar',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '25-free-1830',
+            time: '6:30 PM',
+            kind: 'PONENCIA GRATUITA',
+            title: '“Cuerpo como territorio político y estético”',
+            credit: 'por Valery Arana',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '25-paid-1930',
+            time: '7:30 PM',
+            kind: 'OBRA DE TEATRO',
+            title: '“LOS ZORROS”',
+            credit: 'por Edú Gutierrez<br>+ Conversatorio',
+            place: 'Teatrín de la DDC',
+            mode: 'paid'
+          }
+        ]
+      },
+      {
+        date: '26/04',
+        city: 'HUARAZ',
+        venueShort: 'LA BASE | DDC',
+        tagline: 'TALLERES | PONENCIAS',
+        type: 'OBRA DE TEATRO',
+        title: 'HIJO DE LA MAR',
+        events: [
+          {
+            id: '26-free-1000',
+            time: '10:00 AM',
+            kind: 'TALLER GRATUITO',
+            title: '“La poesía en el trabajo físico del actor”',
+            credit: 'por Edú Gutierrez',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '26-free-1400',
+            time: '2:00 PM',
+            kind: 'TALLER GRATUITO',
+            title: '“Actuación desde 0: cuerpo, voz y presencia escénica”',
+            credit: '',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '26-free-1700',
+            time: '5:00 PM',
+            kind: 'DESMONTAJE GRATUITO',
+            title: '“Los Zorros”',
+            credit: 'por Edú Gutierrez',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '26-free-1830',
+            time: '6:30 PM',
+            kind: 'PONENCIA GRATUITA',
+            title: '“Arguedas y el teatro obrero en el Perú”',
+            credit: 'por Edú Gutierrez',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '26-paid-1930',
+            time: '7:30 PM',
+            kind: 'OBRA DE TEATRO',
+            title: '“HIJO DE LA MAR”',
+            credit: 'por Paolo Lomparte<br>+ Conversatorio',
+            place: 'Teatrín de la DDC',
+            mode: 'paid'
+          }
+        ]
+      },
+      {
+        date: '27/04',
+        city: 'HUARAZ',
+        venueShort: 'LA BASE | DDC',
+        tagline: 'TALLERES | PONENCIAS',
+        type: 'OBRA DE TEATRO',
+        title: 'ETERNO RETORNO',
+        events: [
+          {
+            id: '27-free-1400',
+            time: '2:00 PM',
+            kind: 'TALLER GRATUITO',
+            title: '“Laboratorio de composición escénica II”',
+            credit: 'por Valery Arana',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '27-free-1700',
+            time: '5:00 PM',
+            kind: 'DESMONTAJE GRATUITO',
+            title: '“Hijo de la mar”',
+            credit: 'por Paolo Lomparte',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '27-free-1830',
+            time: '6:30 PM',
+            kind: 'PONENCIA GRATUITA',
+            title: '“La música popular como estudio de la conducta social”',
+            credit: 'por Paolo Lomparte',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '27-paid-1930',
+            time: '7:30 PM',
+            kind: 'OBRA DE TEATRO',
+            title: '“ETERNO RETORNO”',
+            credit: 'por Valery Arana<br>+ Conversatorio',
+            place: 'Teatrín de la DDC',
+            mode: 'paid'
+          }
+        ]
+      },
+      {
+        date: '28/04',
+        city: 'HUARAZ',
+        venueShort: 'LA BASE | DDC',
+        tagline: 'TALLERES | PONENCIAS',
+        type: 'OBRA DE TEATRO',
+        title: 'SE HIZO JUSTICIA',
+        events: [
+          {
+            id: '28-free-1400',
+            time: '2:00 PM',
+            kind: 'TALLER GRATUITO',
+            title: '“Sobre los símbolos, una aproximación a la semiótica”',
+            credit: 'por Paolo Lomparte',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '28-free-1700',
+            time: '5:00 PM',
+            kind: 'DESMONTAJE GRATUITO',
+            title: '“Eterno Retorno”',
+            credit: 'por Valery Arana',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '28-free-1830',
+            time: '6:30 PM',
+            kind: 'PONENCIA GRATUITA',
+            title: '“Escenificar la violencia institucional: autoficción y revictimización del cuerpo femenino a partir del caso ‘Calzón rojo’ en el Perú”',
+            credit: 'por Sharon Olivares',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '28-paid-1930',
+            time: '7:30 PM',
+            kind: 'OBRA DE TEATRO',
+            title: '“SE HIZO JUSTICIA”',
+            credit: 'por Sharon Olivares<br>+ Conversatorio',
+            place: 'Teatrín de la DDC',
+            mode: 'paid'
+          }
+        ]
+      },
+      {
+        date: '29/04',
+        city: 'HUARAZ',
+        venueShort: 'LA BASE | DDC',
+        tagline: 'TALLER | MUESTRA DE ARTISTAS',
+        type: 'CLAUSURA DEL CICLO',
+        title: 'FIESTA DE CIERRE',
+        events: [
+          {
+            id: '29-free-1400',
+            time: '2:00 PM',
+            kind: 'TALLER GRATUITO',
+            title: '“Presencia escénica: Habitar el espacio teatral”',
+            credit: 'por Sharon Olivares',
+            place: 'La Base',
+            mode: 'free'
+          },
+          {
+            id: '29-free-1800',
+            time: '6:00 PM',
+            kind: 'MUESTRA DE ARTISTAS LOCALES GRATUITO',
+            title: 'Muestra de artistas locales',
+            credit: '',
+            place: 'Teatrín de la DDC',
+            mode: 'free'
+          },
+          {
+            id: '29-free-1830',
+            time: '6:30 PM',
+            kind: 'CLAUSURA DEL CICLO',
+            title: 'Creación Colectiva: Exiliados',
+            credit: '',
+            place: 'Teatrín de la DDC',
+            mode: 'free'
+          },
+          {
+            id: '29-free-1930',
+            time: '7:30 PM',
+            kind: 'FIESTA DE CIERRE',
+            title: 'Expedientes del cuerpo',
+            credit: '',
+            place: 'Teatrín de la DDC',
+            mode: 'free'
+          }
+        ]
+      }
+    ];
+
+    const daysList = document.getElementById('daysList');
+
+    function slugify(text) {
+      return text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+    }
+
+    function buildRandomCode(prefix) {
+      const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let randomPart = '';
+      for (let i = 0; i < 6; i++) {
+        randomPart += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+      }
+      return `${prefix}-${randomPart}`;
+    }
+
+    function validEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    async function saveRegistration(payload) {
+      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT') {
+        return {
+          ok: true,
+          registrationCode: payload.registrationType === 'paid'
+            ? buildRandomCode(payload.codePrefix || 'CODIGO')
+            : null
+        };
+      }
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+
+      const text = await response.text();
+      let data = {};
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error('La respuesta del servidor no fue JSON válido.');
+      }
+
+      if (!response.ok || data.ok === false) {
+        throw new Error(data.error || 'No se pudo guardar el registro.');
+      }
+
+      if (payload.registrationType === 'paid' && !data.registrationCode) {
+        data.registrationCode = buildRandomCode(payload.codePrefix || 'CODIGO');
+      }
+
+      return data;
+    }
+
+    function showBox(el, html, type) {
+      el.classList.remove('show', 'ok', 'error');
+      el.innerHTML = html;
+      el.classList.add('show', type);
+    }
+
+    function hideBox(el) {
+      el.classList.remove('show', 'ok', 'error');
+      el.innerHTML = '';
+    }
+
+    function buildWhatsAppLink(payload, registrationCode) {
+      const message =
+`Hola, quiero confirmar mi inscripción para "${payload.eventTitle}".
+Código: ${registrationCode}
+Nombre: ${payload.fullName}
+Tipo de entrada: ${payload.ticketCategory}
+Monto: S/ ${payload.amount}
+Celular: ${payload.phone}
+Correo: ${payload.email}
+Ciudad: ${payload.cityFrom || 'No indicó'}
+Instagram: ${payload.instagram || 'No indicó'}
+Yape realizado a: ${payload.paymentRecipientName}
+Número Yape: ${payload.paymentRecipientNumber}
+Adjunto mi comprobante de Yape.`;
+
+      return `${WHATSAPP_BASE_URL}?text=${encodeURIComponent(message)}`;
+    }
+
+    async function downloadTicketCard(cardElement, fileName) {
+      const canvas = await html2canvas(cardElement, {
+        backgroundColor: null,
+        scale: 2,
+        useCORS: true
+      });
+      const link = document.createElement('a');
+      link.download = fileName;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function renderEventRow(event) {
+      const hint = event.mode === 'paid'
+        ? 'Evento pago'
+        : 'Evento gratuito';
+
+      const titleClass = event.mode === 'paid' ? 'activity feature' : 'activity';
+
+      return `
+        <button class="program-row" type="button" data-event-id="${event.id}" data-mode="${event.mode}">
+          <div class="time-col">${event.time}</div>
+
+          <div class="main-col">
+            <div class="label">${event.kind}</div>
+            <div class="${titleClass}">${event.title}</div>
+            <div class="${event.credit ? 'credit' : 'credit strong'}">${event.credit || '&nbsp;'}</div>
+            <div class="click-hint"><span class="dot"></span>${hint}</div>
+          </div>
+
+          <div class="place-col">${event.place}</div>
+        </button>
+      `;
+    }
+
+    function renderDay(day) {
+      const dayId = `day-${day.date.replace('/', '-')}`;
+      const rows = day.events.map(renderEventRow).join('');
+
+      return `
+        <div class="accordion" id="${dayId}">
+          <button class="event-button" type="button" aria-expanded="false" aria-controls="${dayId}-dropdown">
+            <div class="event-button-inner">
+              <div class="media-panel"></div>
+
+              <div class="content-panel">
+                <div class="left-content">
+                  <p class="tagline">${day.tagline}</p>
+                  <p class="type">${day.type}</p>
+                  <h2 class="title"><span class="quotes">"</span>${day.title}"</h2>
+                </div>
+
+                <div class="right-content">
+                  <div class="date">${day.date}</div>
+                  <div class="date-line"></div>
+                  <div class="city">${day.city}</div>
+                  <p class="venue">${day.venueShort}</p>
+                </div>
+
+                <span class="chevron"></span>
+              </div>
+            </div>
+          </button>
+
+          <div class="dropdown" id="${dayId}-dropdown">
+            <div class="dropdown-inner">
+              <div class="program-shell">${rows}</div>
+              <div class="registration-zone" id="${dayId}-registration"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+
+    function getSelectedEvents(dayId, day) {
+      const selectedButtons = document.querySelectorAll(`#${dayId} .program-row.selected`);
+      const ids = [...selectedButtons].map(btn => btn.dataset.eventId);
+      return day.events.filter(ev => ids.includes(ev.id));
+    }
+
+    function getSelectionMode(events) {
+      if (!events.length) return null;
+      const hasPaid = events.some(e => e.mode === 'paid');
+      const hasFree = events.some(e => e.mode === 'free');
+      if (hasPaid && hasFree) return 'mixed';
+      if (hasPaid) return 'paid';
+      return 'free';
+    }
+
+    function renderSelectionList(events) {
+      return `
+        <div class="selection-list">
+          ${events.map(ev => `
+            <div class="selection-item">
+              <div class="selection-item-top">
+                <div class="selection-time">${ev.time}</div>
+                <div class="selection-kind">${ev.kind}</div>
+              </div>
+              <div class="selection-name">${ev.title}</div>
+              <div class="selection-place">${ev.place}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderFreeForm(dayId, day, selectedEvents) {
+      return `
+        <div class="selection-title">Eventos gratuitos seleccionados</div>
+        ${renderSelectionList(selectedEvents)}
+
+        <p class="row-panel-note">Puedes generar un solo ticket gratuito con los eventos seleccionados de este día.</p>
+
+        <form class="free-form" data-day-id="${dayId}">
+          <div class="form-grid">
+            <div class="field full">
+              <label>Nombres y apellidos <span class="req">*</span></label>
+              <input name="fullName" type="text" placeholder="Ej.: María González" required />
+            </div>
+
+            <div class="field">
+              <label>Celular <span class="req">*</span></label>
+              <input name="phone" type="tel" placeholder="Ej.: 987654321" required />
+            </div>
+
+            <div class="field">
+              <label>Edad</label>
+              <input name="age" type="number" min="0" placeholder="Ej.: 22" />
+            </div>
+
+            <div class="field full">
+              <label>Correo <span class="req">*</span></label>
+              <input name="email" type="email" placeholder="Ej.: nombre@correo.com" required />
+            </div>
+
+            <div class="field">
+              <label>¿De dónde es? (Ciudad)</label>
+              <input name="cityFrom" type="text" placeholder="Ej.: Huaraz" />
+            </div>
+
+            <div class="field">
+              <label>Insta</label>
+              <input name="instagram" type="text" placeholder="Ej.: @usuario" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-primary" type="submit">Generar ticket gratis</button>
+          </div>
+
+          <div class="result-box error"></div>
+          <div class="result-box ok"></div>
+
+          <div class="ticket-preview-wrap">
+            <div class="ticket-preview-card">
+              <div class="ticket-preview-top">
+                <div class="ticket-preview-kicker">Eventos gratuitos</div>
+                <h4 class="ticket-preview-title">${day.date} · ${day.city}</h4>
+              </div>
+
+              <div class="ticket-preview-body">
+                <div class="ticket-preview-pass">Ticket gratuito</div>
+                <p class="ticket-preview-name">INVITADO</p>
+
+                <div class="ticket-preview-meta">
+                  <div class="ticket-meta-box">
+                    <div class="ticket-meta-label">Fecha</div>
+                    <div class="ticket-meta-value">${day.date}</div>
+                  </div>
+                  <div class="ticket-meta-box">
+                    <div class="ticket-meta-label">Ciudad</div>
+                    <div class="ticket-meta-value">${day.city}</div>
+                  </div>
+                </div>
+
+                <div class="ticket-preview-events">
+                  ${selectedEvents.map(ev => `
+                    <div class="ticket-preview-event">
+                      <div class="ticket-preview-event-time">${ev.time}</div>
+                      <div class="ticket-preview-event-name">${ev.title}</div>
+                      <div class="ticket-preview-event-place">${ev.place}</div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions" style="margin-top:0;">
+              <button class="btn-secondary" type="button">Descargar ticket</button>
+            </div>
+          </div>
+        </form>
+      `;
+    }
+
+    function renderPaidForm(dayId, day, selectedEvent) {
+      return `
+        <div class="selection-title">Evento pago seleccionado</div>
+        ${renderSelectionList([selectedEvent])}
+
+        <p class="row-panel-note">No puedes mezclar eventos gratuitos con este evento pago. Elige tu entrada, realiza tu Yape y luego guarda tus datos.</p>
+
+        <div class="price-options">
+          <div class="price-option">
+            <input type="radio" id="${dayId}-student" name="${dayId}-ticketType" value="Estudiante / artista" data-price="10" checked>
+            <label for="${dayId}-student">
+              <div class="price-option-title">Estudiante / artista</div>
+              <div class="price-option-price">S/ 10</div>
+              <div class="price-option-note">Tarifa preferencial</div>
+            </label>
+          </div>
+
+          <div class="price-option">
+            <input type="radio" id="${dayId}-general" name="${dayId}-ticketType" value="Público general" data-price="15">
+            <label for="${dayId}-general">
+              <div class="price-option-title">Público general</div>
+              <div class="price-option-price">S/ 15</div>
+              <div class="price-option-note">Entrada general</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-card-label">Yape</div>
+            <div class="info-card-value">${YAPE_NUMBER}</div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-label">Nombre</div>
+            <div class="info-card-value">${YAPE_NAME}</div>
+          </div>
+        </div>
+
+        <form class="paid-form" data-day-id="${dayId}" data-event-id="${selectedEvent.id}">
+          <div class="form-grid">
+            <div class="field full">
+              <label>Nombres y apellidos <span class="req">*</span></label>
+              <input name="fullName" type="text" placeholder="Ej.: María González" required />
+            </div>
+
+            <div class="field">
+              <label>Celular <span class="req">*</span></label>
+              <input name="phone" type="tel" placeholder="Ej.: 987654321" required />
+            </div>
+
+            <div class="field">
+              <label>Edad</label>
+              <input name="age" type="number" min="0" placeholder="Ej.: 22" />
+            </div>
+
+            <div class="field full">
+              <label>Correo <span class="req">*</span></label>
+              <input name="email" type="email" placeholder="Ej.: nombre@correo.com" required />
+            </div>
+
+            <div class="field">
+              <label>¿De dónde es? (Ciudad)</label>
+              <input name="cityFrom" type="text" placeholder="Ej.: Huaraz" />
+            </div>
+
+            <div class="field">
+              <label>Insta</label>
+              <input name="instagram" type="text" placeholder="Ej.: @usuario" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-primary" type="submit">Guardar datos</button>
+          </div>
+
+          <div class="result-box error"></div>
+          <div class="result-box ok"></div>
+
+          <div class="form-actions wa-wrap" style="display:none; margin-top:16px;">
+            <a class="btn-whatsapp wa-btn" href="#" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.5 3.5A11 11 0 0 0 3.3 16.7L2 22l5.4-1.3A11 11 0 1 0 20.5 3.5zM12 20a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-3.2.8.9-3.1-.2-.3A9 9 0 1 1 12 20zm4.9-6.7c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.1l-.6.8c-.2.2-.3.2-.6.1a7.4 7.4 0 0 1-3.7-3.2c-.2-.3 0-.4.1-.6l.5-.6c.1-.2.2-.3.3-.5a.6.6 0 0 0 0-.5c-.1-.1-.7-1.6-1-2.2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3 1 2.6 1.1 2.7.1.2 2 3.1 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.5.3-.8.3-1.4.2-1.5 0-.1-.2-.2-.5-.3z"/>
+              </svg>
+              Entra en contacto al WhatsApp de La Base
+            </a>
+          </div>
+        </form>
+      `;
+    }
+
+    function updateRegistrationZone(day, accordionEl) {
+      const registrationZone = accordionEl.querySelector('.registration-zone');
+      const selectedEvents = getSelectedEvents(accordionEl.id, day);
+      const mode = getSelectionMode(selectedEvents);
+
+      if (!selectedEvents.length) {
+        registrationZone.innerHTML = `
+          <div class="selection-status">
+            Selecciona uno o más eventos de este día. Puedes elegir varios gratuitos juntos en un solo ticket. Los eventos pagos se registran por separado.
+          </div>
+        `;
+        return;
+      }
+
+      if (mode === 'mixed') {
+        registrationZone.innerHTML = `
+          <div class="selection-status warn">
+            No es posible combinar eventos gratuitos con eventos pagos en una misma inscripción. Deselecciona uno de los dos tipos para continuar.
+          </div>
+        `;
+        return;
+      }
+
+      if (mode === 'free') {
+        registrationZone.innerHTML = renderFreeForm(accordionEl.id, day, selectedEvents);
+        attachFreeFormHandler(day, accordionEl, selectedEvents);
+        return;
+      }
+
+      registrationZone.innerHTML = renderPaidForm(accordionEl.id, day, selectedEvents[0]);
+      attachPaidFormHandler(day, accordionEl, selectedEvents[0]);
+    }
+
+    function getFormPayload(form, config) {
+      const fullName = form.querySelector('input[name="fullName"]').value.trim();
+      const phone = form.querySelector('input[name="phone"]').value.trim();
+      const age = form.querySelector('input[name="age"]').value.trim();
+      const email = form.querySelector('input[name="email"]').value.trim();
+      const cityFrom = form.querySelector('input[name="cityFrom"]').value.trim();
+      const instagram = form.querySelector('input[name="instagram"]').value.trim();
+
+      return {
+        firstName: fullName.split(' ')[0] || fullName,
+        lastName: fullName.split(' ').slice(1).join(' '),
+        fullName,
+        phone,
+        age,
+        email,
+        cityFrom,
+        instagram,
+        selectedEvents: config.selectedEvents || [],
+        eventKey: config.eventKey,
+        eventTitle: config.eventTitle,
+        eventDate: config.eventDate,
+        eventTime: config.eventTime,
+        eventPlace: config.eventPlace,
+        registrationType: config.registrationType,
+        paymentStatus: config.paymentStatus,
+        source: 'expedientes-del-cuerpo',
+        createdAt: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        codePrefix: config.codePrefix,
+        ticketCategory: config.ticketCategory || '',
+        amount: config.amount || '',
+        paymentMethod: config.paymentMethod || '',
+        paymentRecipientName: config.paymentRecipientName || '',
+        paymentRecipientNumber: config.paymentRecipientNumber || ''
+      };
+    }
+
+    function attachFreeFormHandler(day, accordionEl, selectedEvents) {
+      const form = accordionEl.querySelector('.free-form');
+      if (!form) return;
+
+      const errorBox = form.querySelector('.result-box.error');
+      const okBox = form.querySelector('.result-box.ok');
+      const previewWrap = form.querySelector('.ticket-preview-wrap');
+      const previewCard = form.querySelector('.ticket-preview-card');
+      const previewName = form.querySelector('.ticket-preview-name');
+      const downloadBtn = form.querySelector('.btn-secondary');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideBox(errorBox);
+        hideBox(okBox);
+        previewWrap.classList.remove('show');
+
+        const payload = getFormPayload(form, {
+          selectedEvents,
+          eventKey: `free_${day.date.replace('/', '')}`,
+          eventTitle: `Eventos gratuitos ${day.date}`,
+          eventDate: day.date,
+          eventTime: selectedEvents.map(ev => ev.time).join(' | '),
+          eventPlace: selectedEvents.map(ev => ev.place).join(' | '),
+          registrationType: 'free',
+          paymentStatus: 'free',
+          codePrefix: 'CODIGO'
+        });
+
+        if (!payload.fullName || !payload.phone || !payload.email) {
+          showBox(errorBox, 'Completa nombre y apellidos, celular y correo para continuar.', 'error');
+          return;
+        }
+
+        if (!validEmail(payload.email)) {
+          showBox(errorBox, 'Ingresa un correo válido para continuar.', 'error');
+          return;
+        }
+
+        const submitBtn = form.querySelector('.btn-primary');
+        const oldText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Generando ticket...';
+
+        try {
+          await saveRegistration(payload);
+
+          previewName.textContent = payload.fullName.toUpperCase();
+          previewWrap.classList.add('show');
+
+          showBox(okBox, '<strong>Ticket gratuito generado.</strong><br>Tu ticket ya está listo para descarga.', 'ok');
+
+          const safeName = slugify(payload.fullName || 'invitado');
+          downloadBtn.onclick = async () => {
+            await downloadTicketCard(previewCard, `ticket-gratuito-${day.date.replace('/', '-')}-${safeName}.png`);
+          };
+        } catch (error) {
+          showBox(errorBox, error.message || 'Ocurrió un problema al generar el ticket.', 'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = oldText;
+        }
+      });
+    }
+
+    function attachPaidFormHandler(day, accordionEl, selectedEvent) {
+      const form = accordionEl.querySelector('.paid-form');
+      if (!form) return;
+
+      const errorBox = form.querySelector('.result-box.error');
+      const okBox = form.querySelector('.result-box.ok');
+      const waWrap = form.querySelector('.wa-wrap');
+      const waBtn = form.querySelector('.wa-btn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideBox(errorBox);
+        hideBox(okBox);
+        waWrap.style.display = 'none';
+
+        const selectedTicket = form.querySelector(`input[name="${accordionEl.id}-ticketType"]:checked`);
+        const ticketType = selectedTicket ? selectedTicket.value : 'Público general';
+        const ticketPrice = selectedTicket ? Number(selectedTicket.dataset.price) : 15;
+
+        const payload = getFormPayload(form, {
+          selectedEvents: [selectedEvent],
+          eventKey: selectedEvent.id,
+          eventTitle: selectedEvent.title.replace(/<br>/g, ' ').replace(/<\/?[^>]+(>|$)/g, ''),
+          eventDate: day.date,
+          eventTime: selectedEvent.time,
+          eventPlace: selectedEvent.place,
+          registrationType: 'paid',
+          paymentStatus: 'pending_payment',
+          codePrefix: 'CODIGO',
+          ticketCategory: ticketType,
+          amount: ticketPrice,
+          paymentMethod: 'Yape',
+          paymentRecipientName: YAPE_NAME,
+          paymentRecipientNumber: YAPE_NUMBER
+        });
+
+        if (!payload.fullName || !payload.phone || !payload.email) {
+          showBox(errorBox, 'Completa nombre y apellidos, celular y correo para continuar.', 'error');
+          return;
+        }
+
+        if (!validEmail(payload.email)) {
+          showBox(errorBox, 'Ingresa un correo válido para continuar.', 'error');
+          return;
+        }
+
+        const submitBtn = form.querySelector('.btn-primary');
+        const oldText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Guardando datos...';
+
+        try {
+          const result = await saveRegistration(payload);
+          const code = result.registrationCode || buildRandomCode('CODIGO');
+          waBtn.href = buildWhatsAppLink(payload, code);
+          waWrap.style.display = 'flex';
+
+          showBox(
+            okBox,
+            `<strong>Datos guardados correctamente.</strong><br><span class="registration-code">${code}</span><br>Infórmanos tu código por WhatsApp y envía tu comprobante de Yape.`,
+            'ok'
+          );
+        } catch (error) {
+          showBox(errorBox, error.message || 'Ocurrió un problema al guardar tus datos.', 'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = oldText;
+        }
+      });
+    }
+
+    daysData.forEach((day) => {
+      daysList.insertAdjacentHTML('beforeend', renderDay(day));
+      const accordionEl = document.getElementById(`day-${day.date.replace('/', '-')}`);
+      const mainButton = accordionEl.querySelector('.event-button');
+      const programRows = accordionEl.querySelectorAll('.program-row');
+
+      mainButton.addEventListener('click', () => {
+        const isOpen = accordionEl.classList.toggle('open');
+        mainButton.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      programRows.forEach((row) => {
+        row.addEventListener('click', () => {
+          const clickedId = row.dataset.eventId;
+          const clickedMode = row.dataset.mode;
+          const clickedIsSelected = row.classList.contains('selected');
+
+          const allRows = [...accordionEl.querySelectorAll('.program-row')];
+          const freeRows = allRows.filter(r => r.dataset.mode === 'free');
+          const paidRows = allRows.filter(r => r.dataset.mode === 'paid');
+
+          if (clickedMode === 'paid') {
+            if (clickedIsSelected) {
+              row.classList.remove('selected');
+            } else {
+              freeRows.forEach(r => r.classList.remove('selected'));
+              paidRows.forEach(r => r.classList.remove('selected'));
+              row.classList.add('selected');
+            }
+          } else {
+            const anyPaidSelected = paidRows.some(r => r.classList.contains('selected'));
+            if (anyPaidSelected) {
+              paidRows.forEach(r => r.classList.remove('selected'));
+            }
+            row.classList.toggle('selected');
+          }
+
+          updateRegistrationZone(day, accordionEl);
+        });
+      });
+
+      updateRegistrationZone(day, accordionEl);
+    });
+  </script>
+</body>
+</html>
