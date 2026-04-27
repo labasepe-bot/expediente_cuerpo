@@ -8,58 +8,65 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=League+Gothic&family=Montserrat:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg: #838997;
-      --green: #7a9632;
-      --panel: #6e7590;
-      --text: #000000;
-      --navy: #041b36;
-      --line: rgba(0,0,0,.28);
-      --white-soft: rgba(255,255,255,.94);
-      --white-mid: rgba(255,255,255,.8);
-      --white-low: rgba(255,255,255,.66);
-      --accent: #e1b14f;
-      --shadow: 0 14px 34px rgba(0,0,0,.12);
-      --shadow-hover: 0 22px 48px rgba(0,0,0,.18);
-      --radius: 30px;
-      --danger: #ffb5b5;
-      --whatsapp: #25D366;
-      --soft-card: rgba(255,255,255,.06);
-      --soft-border: rgba(255,255,255,.1);
-      --ok-bg: rgba(143,207,111,.13);
-      --ok-border: rgba(143,207,111,.45);
-      --warn-bg: rgba(225,177,79,.11);
-      --warn-border: rgba(225,177,79,.42);
-    }
+  --bg: #858b98;
+  --bg-deep: #757d8d;
+  --green: #7f992b;
+  --green-deep: #728a25;
+  --panel: #6e7590;
+  --text: #08111f;
+  --navy: #041b36;
+  --line: rgba(4,27,54,.18);
+  --white-soft: rgba(255,255,255,.96);
+  --white-mid: rgba(255,255,255,.82);
+  --white-low: rgba(255,255,255,.68);
+  --accent: #e1b14f;
+  --accent-soft: rgba(225,177,79,.18);
+  --shadow: 0 20px 44px rgba(16,24,40,.12);
+  --shadow-hover: 0 28px 60px rgba(16,24,40,.18);
+  --radius: 32px;
+  --radius-sm: 22px;
+  --danger: #ffb5b5;
+  --whatsapp: #25D366;
+  --soft-card: rgba(255,255,255,.08);
+  --soft-border: rgba(255,255,255,.12);
+  --ok-bg: rgba(143,207,111,.13);
+  --ok-border: rgba(143,207,111,.45);
+  --warn-bg: rgba(225,177,79,.11);
+  --warn-border: rgba(225,177,79,.42);
+}
 
     * { box-sizing: border-box; }
     html, body { width:100%; overflow-x:hidden; }
 
-    body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
-      background: var(--bg);
-      padding: 28px;
-      font-family: Arial, sans-serif;
-    }
+   body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.14), transparent 32%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  padding: 28px;
+  font-family: Arial, sans-serif;
+}
 
-    .stack{
-      width:min(1680px, 100%);
-    }
+.stack{
+  width:min(1480px, 100%);
+}
 
-    .page-header{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-      color:var(--navy);
-      padding: 18px 0 54px;
-    }
+.page-header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  color:var(--navy);
+  padding: 22px 0 58px;
+}
 
     .ornament{
       display:flex;
@@ -86,30 +93,30 @@
       border-radius: 1px;
       flex: 0 0 auto;
     }
+.festival-title{
+  margin: 0;
+  text-transform: uppercase;
+  color: var(--navy);
+  line-height: .82;
+  text-wrap: balance;
+}
 
-    .festival-title{
-      margin: 0;
-      text-transform: uppercase;
-      color: var(--navy);
-      line-height: .84;
-    }
+.festival-title-top{
+  display:block;
+  font-family: "League Gothic", sans-serif;
+  font-size: clamp(72px, 10vw, 168px);
+  letter-spacing: .028em;
+  font-weight: 400;
+}
 
-    .festival-title-top{
-      display:block;
-      font-family: "League Gothic", sans-serif;
-      font-size: clamp(72px, 10vw, 170px);
-      letter-spacing: .02em;
-      font-weight: 400;
-    }
-
-    .festival-title-bottom{
-      display:block;
-      font-family: "League Gothic", sans-serif;
-      font-size: clamp(175px, 24vw, 430px);
-      letter-spacing: .015em;
-      font-weight: 400;
-      margin-top: 4px;
-    }
+.festival-title-bottom{
+  display:block;
+  font-family: "League Gothic", sans-serif;
+  font-size: clamp(175px, 24vw, 418px);
+  letter-spacing: .02em;
+  font-weight: 400;
+  margin-top: 0;
+}
 
     .festival-divider{
       display:flex;
@@ -214,84 +221,100 @@
       display:block;
     }
 
-    .event-button-inner{
-      display:grid;
-      grid-template-columns: 19.5% 1fr;
-      width:100%;
-      min-height: 455px;
-      border-radius: var(--radius);
-      overflow:hidden;
-      box-shadow: var(--shadow);
-      transition: transform .24s ease, box-shadow .24s ease, filter .24s ease;
-      position:relative;
-    }
+  .event-button-inner{
+  display:grid;
+  grid-template-columns: 18% 1fr;
+  width:100%;
+  min-height: 360px;
+  border-radius: var(--radius);
+  overflow:hidden;
+  box-shadow: var(--shadow);
+  transition: transform .24s ease, box-shadow .24s ease, filter .24s ease;
+  position:relative;
+  border: 1px solid rgba(255,255,255,.12);
+}
 
-    .event-button:hover .event-button-inner{
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-hover);
-      filter: saturate(1.03);
-    }
+.event-button-inner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+}
 
-    .event-button:active .event-button-inner{
-      transform: translateY(-1px);
-    }
+.event-button:hover .event-button-inner{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  filter: saturate(1.04);
+}
 
-    .media-panel{
-      position: relative;
-      background: url("la-base-vertical.png") center center / cover no-repeat;
-      min-width: 0;
-      filter: saturate(1.02) contrast(1.02);
-    }
+.event-button:active .event-button-inner{
+  transform: translateY(-1px);
+}
 
-    .content-panel{
-      position:relative;
-      background: var(--green);
-      display:grid;
-      grid-template-columns: 58% 42%;
-      min-width:0;
-    }
+   .media-panel{
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.04)),
+    url("la-base-vertical.png") center center / cover no-repeat;
+  min-width: 0;
+  filter: saturate(1.03) contrast(1.03);
+}
 
-    .left-content{
-      padding: 6.8% 3.4% 6.2% 3.9%;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
-      align-items:flex-start;
-      color:var(--text);
-      min-width:0;
-    }
+.content-panel{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.03)),
+    linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+  display:grid;
+  grid-template-columns: 58% 42%;
+  min-width:0;
+}
 
-    .tagline{
-      font-family: "Barlow Condensed", sans-serif;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.005em;
-      font-size: clamp(21px, 2.45vw, 46px);
-      line-height:.92;
-      margin:0 0 4.2% 0;
-    }
+.left-content{
+  padding: 34px 28px 32px 34px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:flex-start;
+  color:var(--text);
+  min-width:0;
+}
 
-    .type{
-      font-family: "Barlow Condensed", sans-serif;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.002em;
-      font-size: clamp(32px, 3.45vw, 70px);
-      line-height:.90;
-      margin:0 0 5.3% 0;
-    }
+.tagline{
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.025em;
+  font-size: clamp(18px, 1.55vw, 30px);
+  line-height:1;
+  margin:0 0 14px 0;
+  opacity:.96;
+}
 
-    .title{
-      font-family: "League Gothic", sans-serif;
-      font-weight:400;
-      color:var(--text);
-      font-size: clamp(110px, 11vw, 245px);
-      line-height:.80;
-      letter-spacing: .005em;
-      margin:0;
-      text-transform:uppercase;
-      text-align:left;
-    }
+.type{
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.01em;
+  font-size: clamp(28px, 2.5vw, 52px);
+  line-height:.94;
+  margin:0 0 14px 0;
+}
+
+.title{
+  font-family: "League Gothic", sans-serif;
+  font-weight:400;
+  color:var(--text);
+  font-size: clamp(88px, 8.7vw, 190px);
+  line-height:.84;
+  letter-spacing: .01em;
+  margin:0;
+  text-transform:uppercase;
+  text-align:left;
+  max-width: 100%;
+  word-break: break-word;
+}
 
     .title .quotes{
       font-family: "Barlow Condensed", sans-serif;
@@ -301,66 +324,66 @@
       margin-right: .02em;
     }
 
-    .right-content{
-      position:relative;
-      padding: 7.5% 7.4% 7.2% 6.6%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      color:var(--text);
-      min-width:0;
-    }
+   .right-content{
+  position:relative;
+  padding: 34px 30px 34px 30px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:var(--text);
+  min-width:0;
+}
 
-    .right-content::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:15%;
-      bottom:15%;
-      width:2px;
-      background: var(--line);
-    }
+.right-content::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:14%;
+  bottom:14%;
+  width:2px;
+  background: rgba(4,27,54,.2);
+}
 
-    .date{
-      font-family: "League Gothic", sans-serif;
-      font-weight:400;
-      font-size: clamp(72px, 9vw, 176px);
-      line-height:.82;
-      letter-spacing:.01em;
-      margin:0 0 6.5% 0;
-      text-transform:uppercase;
-    }
+.date{
+  font-family: "League Gothic", sans-serif;
+  font-weight:400;
+  font-size: clamp(78px, 7vw, 148px);
+  line-height:.84;
+  letter-spacing:.02em;
+  margin:0 0 18px 0;
+  text-transform:uppercase;
+}
 
-    .date-line{
-      width: 74%;
-      height: 2px;
-      background: var(--line);
-      margin-bottom: 7.4%;
-    }
+.date-line{
+  width: 82%;
+  height: 2px;
+  background: rgba(4,27,54,.2);
+  margin-bottom: 18px;
+}
 
-    .city{
-      font-family: "Barlow Condensed", sans-serif;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing: .06em;
-      font-size: clamp(24px, 2.7vw, 52px);
-      line-height:1;
-      margin:0 0 3.4% 0;
-    }
+.city{
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing: .08em;
+  font-size: clamp(24px, 2.1vw, 42px);
+  line-height:1;
+  margin:0 0 10px 0;
+}
 
-    .venue{
-      font-family: "Barlow Condensed", sans-serif;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing: .12em;
-      font-size: clamp(12px, 1.15vw, 24px);
-      line-height:1;
-      color: var(--white-soft);
-      margin:0;
-      text-align:center;
-      white-space:nowrap;
-    }
+.venue{
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing: .12em;
+  font-size: clamp(11px, .95vw, 18px);
+  line-height:1.15;
+  color: var(--white-soft);
+  margin:0;
+  text-align:center;
+  white-space:normal;
+}
 
     .chevron{
       position:absolute;
@@ -397,140 +420,119 @@
       transform: translateY(0);
     }
 
-    .dropdown-inner{
-      background:
-        linear-gradient(rgba(102,110,137,.9), rgba(102,110,137,.9)),
-        radial-gradient(circle at 18% 68%, rgba(255,255,255,.09) 0 16%, transparent 17%),
-        radial-gradient(circle at 72% 22%, rgba(255,255,255,.06) 0 10%, transparent 11%),
-        radial-gradient(circle at 46% 44%, rgba(255,255,255,.05) 0 18%, transparent 19%),
-        linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-      border-radius: 0 0 34px 34px;
-      box-shadow: var(--shadow);
-      padding: 0;
-      color: white;
-      overflow: hidden;
-    }
+.dropdown-inner{
+  background:
+    linear-gradient(rgba(110,118,142,.96), rgba(104,112,136,.96)),
+    radial-gradient(circle at 18% 68%, rgba(255,255,255,.08) 0 16%, transparent 17%),
+    radial-gradient(circle at 72% 22%, rgba(255,255,255,.05) 0 10%, transparent 11%),
+    linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+  border-radius: 0 0 34px 34px;
+  box-shadow: var(--shadow);
+  padding: 0;
+  color: white;
+  overflow: hidden;
+}
 
-    .program-shell{
-      display:grid;
-      grid-template-columns: 1fr;
-    }
+.program-row{
+  display:grid;
+  grid-template-columns: 150px 1fr 240px;
+  gap: 22px;
+  padding: 26px 30px;
+  align-items:center;
+  position:relative;
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color .25s ease, box-shadow .2s ease, transform .18s ease;
+}
 
-    .program-row{
-      display:grid;
-      grid-template-columns: 180px 1fr 300px;
-      gap: 26px;
-      padding: 30px 34px;
-      align-items:start;
-      position:relative;
-      background: transparent;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      width: 100%;
-      text-align: left;
-      color: inherit;
-      cursor: pointer;
-      transition: background-color .25s ease, box-shadow .2s ease;
-    }
+.program-row:hover{
+  background: rgba(255,255,255,.045);
+}
 
-    .program-row:last-child{
-      border-bottom: none;
-    }
+.program-row.selected{
+  background: rgba(225,177,79,.13);
+  box-shadow: inset 0 0 0 1px rgba(225,177,79,.38);
+}
+.time-col{
+  color: var(--accent);
+  font-family: "League Gothic", sans-serif;
+  font-size: clamp(42px, 3vw, 68px);
+  line-height:.92;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  text-shadow: 0 2px 4px rgba(0,0,0,.12);
+}
 
-    .program-row:hover{
-      background: rgba(255,255,255,.03);
-    }
+.label{
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight:700;
+  text-transform:uppercase;
+  font-size: clamp(18px, 1.15vw, 24px);
+  line-height:1;
+  letter-spacing:.05em;
+  color: rgba(255,255,255,.95);
+  margin-bottom: 8px;
+}
 
-    .program-row.selected{
-      background: rgba(225,177,79,.12);
-      box-shadow: inset 0 0 0 1px rgba(225,177,79,.35);
-    }
+.activity{
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight:700;
+  color: white;
+  font-size: clamp(28px, 2vw, 46px);
+  line-height:1.02;
+  margin:0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,.12);
+}
+.activity.feature{
 
-    .time-col{
-      color: var(--accent);
-      font-family: "League Gothic", sans-serif;
-      font-size: clamp(46px, 3.9vw, 78px);
-      line-height:.88;
-      letter-spacing:.01em;
-      text-transform:uppercase;
-      white-space:nowrap;
-      text-shadow: 0 2px 4px rgba(0,0,0,.18);
-    }
+  color: var(--accent);
 
-    .main-col{
-      min-width:0;
-    }
+}
+.credit{
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  color: var(--white-mid);
+  font-size: clamp(15px, .95vw, 20px);
+  line-height:1.35;
+}
 
-    .label{
-      font-family: "Barlow Condensed", sans-serif;
-      font-weight:700;
-      text-transform:uppercase;
-      font-size: clamp(22px, 1.45vw, 30px);
-      line-height:1;
-      letter-spacing:.03em;
-      color: rgba(255,255,255,.96);
-      margin-bottom: 10px;
-    }
+.place-col{
+  border-left: 2px solid rgba(225,177,79,.42);
+  padding-left: 22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height: 100%;
+  color: rgba(255,255,255,.96);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(20px, 1.35vw, 30px);
+  line-height:1.08;
+  text-align:left;
+  position:relative;
+}
 
-    .activity{
-      font-family: "Barlow Condensed", sans-serif;
-      font-weight:700;
-      color: white;
-      font-size: clamp(34px, 2.8vw, 60px);
-      line-height:1.02;
-      margin:0 0 10px 0;
-      text-shadow: 0 2px 4px rgba(0,0,0,.16);
-    }
-
-    .activity.feature{
-      color: var(--accent);
-    }
-
-    .credit{
-      font-family: Arial, sans-serif;
-      font-style: italic;
-      color: var(--white-mid);
-      font-size: clamp(18px, 1.15vw, 26px);
-      line-height:1.28;
-    }
-
-    .credit.strong{
-      font-style: normal;
-      color: rgba(255,255,255,.92);
-      font-size: clamp(17px, 1.1vw, 24px);
-    }
-
-    .place-col{
-      border-left: 2px solid rgba(225,177,79,.5);
-      padding-left: 30px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      min-height: 100%;
-      color: rgba(255,255,255,.96);
-      font-family: "Barlow Condensed", sans-serif;
-      font-size: clamp(28px, 2vw, 42px);
-      line-height:1.06;
-      text-align:left;
-      position:relative;
-    }
-
-    .click-hint{
-      margin-top: 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(225,177,79,.14);
-      border: 1px solid rgba(225,177,79,.28);
-      color: #fff8e8;
-      font-family: "Barlow Condensed", sans-serif;
-      font-size: 18px;
-      line-height: 1;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      flex-wrap: wrap;
-    }
+ .click-hint{
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
+  border-radius: 999px;
+  background: rgba(225,177,79,.13);
+  border: 1px solid rgba(225,177,79,.26);
+  color: #fff8e8;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  flex-wrap: wrap;
+}
 
     .click-hint .dot{
       width: 10px;
@@ -541,50 +543,44 @@
       flex: 0 0 auto;
     }
 
-    .registration-zone{
-      padding: 26px 34px 34px;
-      border-top: 1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.025);
-    }
+.registration-zone{
+  padding: 34px 30px 38px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.03);
+}
 
-    .selection-status{
-      border-radius: 18px;
-      padding: 16px 18px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-      color: #edf3ff;
-      line-height: 1.5;
-      margin-bottom: 18px;
-      font-size: 15px;
-    }
+.selection-status{
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  color: #edf3ff;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
 
-    .selection-status.warn{
-      background: var(--warn-bg);
-      border-color: var(--warn-border);
-      color: #fff6de;
-    }
+.selection-status.warn{
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+  color: #fff6de;
+}
 
-    .selection-title{
-      margin: 0 0 12px;
-      font-family: "Barlow Condensed", sans-serif;
-      font-size: clamp(24px, 1.8vw, 40px);
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
+.selection-title{
+  margin: 0 0 12px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(24px, 1.8vw, 40px);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 
-    .selection-list{
-      display:grid;
-      gap:10px;
-      margin-bottom: 18px;
-    }
-
-    .selection-item{
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 14px;
-      padding: 12px 14px;
-    }
+.selection-item{
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  padding: 13px 15px;
+}
 
     .selection-item-top{
       display:flex;
@@ -628,7 +624,7 @@
       color: var(--white-mid);
       font-size: 15px;
       line-height: 1.45;
-      margin: -4px 0 18px;
+      margin: 10px 0 22px;
     }
 
     .info-cards{
@@ -731,6 +727,9 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
     }
+.form-actions{
+  margin-top: 24px;
+}
 
     .field{
       display: flex;
@@ -753,51 +752,37 @@
     .field .req{
       color: var(--accent);
     }
+.field input{
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(15,23,42,.36);
+  color: #fff;
+  border-radius: 16px;
+  padding: 16px 17px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease, transform .18s ease;
+}
 
-    .field input{
-      width: 100%;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(15,23,42,.32);
-      color: #fff;
-      border-radius: 14px;
-      padding: 15px 16px;
-      font-size: 16px;
-      outline: none;
-      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
-    }
-
-    .field input:focus{
-      border-color: rgba(225,177,79,.8);
-      box-shadow: 0 0 0 3px rgba(225,177,79,.16);
-      background: rgba(15,23,42,.45);
-    }
-
-    .form-actions{
-      margin-top: 18px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary,
-    .btn-secondary,
-    .btn-whatsapp{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      border: 0;
-      border-radius: 16px;
-      padding: 16px 22px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
-      font-family: "Barlow Condensed", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      font-size: 22px;
-      width: 100%;
-    }
+.btn-primary,
+.btn-secondary,
+.btn-whatsapp{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 18px;
+  padding: 17px 22px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+  font-family: "Barlow Condensed", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: 21px;
+  width: 100%;
+}
 
     .btn-primary{
       background: var(--accent);
@@ -831,7 +816,23 @@
       fill: currentColor;
       flex: 0 0 auto;
     }
+.event-button:focus-visible,
 
+.program-row:focus-visible,
+
+.btn-primary:focus-visible,
+
+.btn-secondary:focus-visible,
+
+.btn-whatsapp:focus-visible,
+
+.field input:focus-visible{
+
+  outline: 3px solid rgba(225,177,79,.7);
+
+  outline-offset: 3px;
+
+}
     .result-box{
       display:none;
       margin-top: 16px;
@@ -1026,110 +1027,290 @@
       }
     }
 
-    @media (max-width: 700px){
-      body{ padding: 14px; }
-      .stack{ width: 100%; }
+@media (max-width: 700px){
+  body{
+    padding: 12px;
+  }
 
-      .page-header{ padding: 8px 0 34px; }
-      .ornament{ gap: 12px; margin-bottom: 18px; }
-      .ornament-line{ height: 2px; }
-      .ornament-diamond{ width: 14px; height: 14px; }
-      .festival-divider{ gap: 12px; margin: 14px 0 14px; }
-      .festival-divider .ornament-diamond{ width: 14px; height: 14px; }
-      .festival-short-line{ height: 3px; margin: 18px 0 18px; }
-      .festival-venue{ margin-bottom: 24px; }
-      .program-heading{ gap: 14px; }
-      .program-heading-text{ letter-spacing: .2em; padding-left: .2em; }
+  .stack{
+    width: 100%;
+  }
 
-      .event-button-inner{
-        grid-template-columns: 155px 1fr;
-        min-height: 240px;
-        border-radius: 22px;
-      }
+  .page-header{
+    padding: 6px 0 28px;
+  }
 
-      .content-panel{ grid-template-columns: 58% 42%; }
-      .media-panel{ min-height: 240px; }
-      .left-content{ padding: 16px 12px 14px 16px; }
-      .tagline{ font-size: 18px; margin: 0 0 10px 0; }
-      .type{ font-size: 25px; margin: 0 0 12px 0; }
-      .title{ font-size: 78px; line-height: .82; }
-      .right-content{ padding: 18px 16px 28px 16px; }
-      .right-content::before{
-        left: 0; top: 14%; bottom: 14%; width: 2px; height: auto;
-      }
-      .date{ font-size: 88px; margin: 0 0 12px 0; }
-      .date-line{ width: 82%; margin-bottom: 12px; }
-      .city{ font-size: 28px; margin: 0 0 8px 0; }
-      .venue{ font-size: 12px; letter-spacing: .08em; white-space: nowrap; }
-      .chevron{ right: 16px; bottom: 14px; width: 14px; height: 14px; }
+  .ornament{
+    gap: 12px;
+    margin-bottom: 16px;
+  }
 
-      .program-row{
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 18px 16px;
-      }
+  .ornament-line{
+    height: 2px;
+  }
 
-      .time-col{ font-size: 48px; }
-      .label{ font-size: 17px; margin-bottom: 8px; }
-      .activity{ font-size: 28px; }
-      .credit, .credit.strong{ font-size: 15px; line-height: 1.35; }
+  .ornament-diamond{
+    width: 14px;
+    height: 14px;
+  }
 
-      .place-col{
-        border-left: none;
-        border-top: 1px solid rgba(225,177,79,.42);
-        padding-left: 0;
-        padding-top: 12px;
-        font-size: 22px;
-      }
+  .festival-divider{
+    gap: 12px;
+    margin: 12px 0;
+  }
 
-      .registration-zone{
-        padding: 18px 16px 22px;
-      }
+  .festival-divider .ornament-diamond{
+    width: 14px;
+    height: 14px;
+  }
 
-      .form-grid,
-      .info-cards,
-      .price-options,
-      .ticket-preview-meta{
-        grid-template-columns: 1fr;
-      }
+  .festival-short-line{
+    height: 3px;
+    margin: 16px 0 18px;
+  }
 
-      .btn-primary,
-      .btn-secondary,
-      .btn-whatsapp{
-        font-size: 19px;
-        padding: 15px 18px;
-      }
+  .festival-date{
+    font-size: clamp(44px, 12vw, 74px);
+  }
 
-      .click-hint{
-        font-size: 15px;
-        padding: 8px 12px;
-      }
-    }
+  .festival-venue{
+    font-size: clamp(26px, 7vw, 44px);
+    margin-bottom: 20px;
+  }
 
-    @media (max-width: 430px){
-      .festival-title-top{ letter-spacing: .01em; }
-      .festival-title-bottom{ letter-spacing: .01em; }
-      .program-heading-text{ letter-spacing: .16em; padding-left: .16em; }
+  .program-heading{
+    gap: 12px;
+  }
 
-      .event-button-inner{
-        grid-template-columns: 122px 1fr;
-        min-height: 200px;
-      }
+  .program-heading-text{
+    letter-spacing: .18em;
+    padding-left: .18em;
+    font-size: clamp(24px, 6vw, 36px);
+  }
 
-      .media-panel{ min-height: 200px; }
-      .left-content{ padding: 14px 10px 12px 12px; }
-      .tagline{ font-size: 15px; margin-bottom: 8px; }
-      .type{ font-size: 21px; margin-bottom: 10px; }
-      .title{ font-size: 62px; }
-      .right-content{ padding: 14px 12px 24px 12px; }
-      .date{ font-size: 70px; margin-bottom: 10px; }
-      .date-line{ margin-bottom: 10px; }
-      .city{ font-size: 22px; margin-bottom: 6px; }
-      .venue{ font-size: 10px; letter-spacing: .07em; }
-      .time-col{ font-size: 40px; }
-      .activity{ font-size: 24px; }
-      .place-col{ font-size: 19px; }
-    }
+  .event-button-inner{
+    grid-template-columns: 96px 1fr;
+    min-height: 156px;
+    border-radius: 24px;
+  }
+
+  .media-panel{
+    min-height: 156px;
+  }
+
+  .content-panel{
+    grid-template-columns: 1fr 126px;
+  }
+
+  .left-content{
+    padding: 16px 12px 16px 16px;
+  }
+
+  .tagline{
+    font-size: 12px;
+    margin: 0 0 7px 0;
+    letter-spacing: .04em;
+  }
+
+  .type{
+    font-size: 16px;
+    margin: 0 0 7px 0;
+    line-height: .95;
+  }
+
+  .title{
+    font-size: clamp(50px, 12vw, 74px);
+    line-height: .86;
+    letter-spacing: .012em;
+  }
+
+  .right-content{
+    padding: 14px 10px 22px 10px;
+  }
+
+  .right-content::before{
+    left: 0;
+    top: 14%;
+    bottom: 14%;
+    width: 2px;
+    height: auto;
+  }
+
+  .date{
+    font-size: 46px;
+    margin: 0 0 10px 0;
+  }
+
+  .date-line{
+    width: 84%;
+    margin-bottom: 10px;
+  }
+
+  .city{
+    font-size: 17px;
+    margin: 0 0 6px 0;
+    letter-spacing: .07em;
+  }
+
+  .venue{
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: .08em;
+    white-space: normal;
+  }
+
+  .chevron{
+    right: 12px;
+    bottom: 10px;
+    width: 12px;
+    height: 12px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+  }
+
+  .program-row{
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 16px 14px;
+  }
+
+  .time-col{
+    font-size: 34px;
+  }
+
+  .label{
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .activity{
+    font-size: 24px;
+  }
+
+  .credit{
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.credit.strong{
+  font-size: 14px;
+  line-height: 1.35;
+  font-style: normal;
+  color: rgba(255,255,255,.92);
+}
+
+  .place-col{
+    border-left: none;
+    border-top: 1px solid rgba(225,177,79,.36);
+    padding-left: 0;
+    padding-top: 10px;
+    font-size: 18px;
+  }
+
+  .registration-zone{
+    padding: 16px 14px 20px;
+  }
+
+  .form-grid,
+  .info-cards,
+  .price-options,
+  .ticket-preview-meta{
+    grid-template-columns: 1fr;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-whatsapp{
+    font-size: 18px;
+    padding: 14px 16px;
+  }
+
+  .click-hint{
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+}
+      @media (max-width: 430px){
+  .festival-title-top{
+    letter-spacing: .012em;
+  }
+
+  .festival-title-bottom{
+    letter-spacing: .012em;
+  }
+
+  .program-heading-text{
+    letter-spacing: .14em;
+    padding-left: .14em;
+  }
+
+  .event-button-inner{
+    grid-template-columns: 84px 1fr;
+    min-height: 142px;
+  }
+
+  .media-panel{
+    min-height: 142px;
+  }
+
+  .content-panel{
+    grid-template-columns: 1fr 108px;
+  }
+
+  .left-content{
+    padding: 14px 10px 14px 14px;
+  }
+
+  .tagline{
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+  .type{
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .title{
+    font-size: clamp(42px, 11vw, 58px);
+    line-height: .88;
+  }
+
+  .right-content{
+    padding: 12px 8px 18px 8px;
+  }
+
+  .date{
+    font-size: 38px;
+    margin-bottom: 8px;
+  }
+
+  .date-line{
+    margin-bottom: 8px;
+  }
+
+  .city{
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .venue{
+    font-size: 8px;
+    letter-spacing: .06em;
+  }
+
+  .time-col{
+    font-size: 30px;
+  }
+
+  .activity{
+    font-size: 21px;
+  }
+
+  .place-col{
+    font-size: 16px;
+  }
+}
   </style>
 </head>
 <body>
@@ -1169,12 +1350,123 @@
     <div class="days-list" id="daysList"></div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
-    const GOOGLE_SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoG-WUb332K306fL0Sl09zrd6Tt-1HjWmKJBqC1ViOY6-vrNqFBPydv4B2EA1wqEEsYg/exec';
     const WHATSAPP_BASE_URL = 'https://wa.me/51997128075';
     const YAPE_NUMBER = '959870977';
     const YAPE_NAME = 'Elizabeth Salinas Bernuy';
+const TICKET_TEMPLATE_SRC = 'exp-ticket.jpg';
+
+const TICKET_FIELDS = {
+  name: {
+    label: "Nombre",
+    valueKey: "name",
+    x: 220,
+    y: 840,
+    maxWidth: 760,
+    fontSize: 52,
+    lineHeight: 56,
+    maxLines: 1,
+    color: "#1f2d63",
+    align: "left"
+  },
+  event: {
+    label: "Evento",
+    valueKey: "event",
+    x: 210,
+    y: 1020,
+    maxWidth: 760,
+    fontSize: 42,
+    lineHeight: 46,
+    maxLines: 3,
+    color: "#1f2d63",
+    align: "left"
+  },
+  time: {
+    label: "Hora",
+    valueKey: "time",
+    x: 160,
+    y: 1235,
+    maxWidth: 180,
+    fontSize: 30,
+    lineHeight: 34,
+    maxLines: 1,
+    color: "#1f2d63",
+    align: "left"
+  },
+  place: {
+    label: "Lugar",
+    valueKey: "place",
+    x: 390,
+    y: 1235,
+    maxWidth: 250,
+    fontSize: 26,
+    lineHeight: 30,
+    maxLines: 2,
+    color: "#1f2d63",
+    align: "left"
+  },
+  date: {
+    label: "Fecha",
+    valueKey: "date",
+    x: 760,
+    y: 1235,
+    maxWidth: 210,
+    fontSize: 28,
+    lineHeight: 32,
+    maxLines: 1,
+    color: "#1f2d63",
+    align: "left"
+  },
+  city: {
+    label: "Ciudad / sede",
+    valueKey: "city",
+    x: 330,
+    y: 1370,
+    maxWidth: 700,
+    fontSize: 30,
+    lineHeight: 34,
+    maxLines: 1,
+    color: "#1f2d63",
+    align: "left"
+  },
+  leftTag: {
+    label: "Etiqueta izquierda",
+    valueKey: "leftTag",
+    x: 320,
+    y: 1520,
+    maxWidth: 280,
+    fontSize: 30,
+    lineHeight: 34,
+    maxLines: 2,
+    color: "#ffffff",
+    align: "center"
+  },
+  rightTag: {
+    label: "Etiqueta derecha",
+    valueKey: "rightTag",
+    x: 760,
+    y: 1520,
+    maxWidth: 280,
+    fontSize: 30,
+    lineHeight: 34,
+    maxLines: 2,
+    color: "#ffffff",
+    align: "center"
+  },
+  bottomCode: {
+    label: "Código inferior",
+    valueKey: "bottomCode",
+    x: 505,
+    y: 1802,
+    maxWidth: 620,
+    fontSize: 24,
+    lineHeight: 28,
+    maxLines: 1,
+    color: "#1f2d63",
+    align: "center"
+  }
+};
 
     const daysData = [
       {
@@ -1543,18 +1835,104 @@ Adjunto mi comprobante de Yape.`;
 
       return `${WHATSAPP_BASE_URL}?text=${encodeURIComponent(message)}`;
     }
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error(`No se pudo cargar la imagen: ${src}`));
+    img.src = src;
+  });
+}
 
-    async function downloadTicketCard(cardElement, fileName) {
-      const canvas = await html2canvas(cardElement, {
-        backgroundColor: null,
-        scale: 2,
-        useCORS: true
-      });
-      const link = document.createElement('a');
-      link.download = fileName;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+function wrapCanvasText(ctx, text, maxWidth) {
+  const cleanText = String(text || '').trim();
+  if (!cleanText) return [];
+
+  const words = cleanText.split(/\s+/);
+  const lines = [];
+  let current = '';
+
+  for (let word of words) {
+    let test = current ? `${current} ${word}` : word;
+
+    if (ctx.measureText(test).width <= maxWidth) {
+      current = test;
+      continue;
     }
+
+    if (current) {
+      lines.push(current);
+      current = '';
+    }
+
+    if (ctx.measureText(word).width <= maxWidth) {
+      current = word;
+      continue;
+    }
+
+    let partial = '';
+    for (const char of word) {
+      const next = partial + char;
+      if (ctx.measureText(next).width <= maxWidth) {
+        partial = next;
+      } else {
+        if (partial) lines.push(partial);
+        partial = char;
+      }
+    }
+    current = partial;
+  }
+
+  if (current) lines.push(current);
+
+  return lines;
+}
+
+function drawTicketField(ctx, fieldConfig, value) {
+  ctx.save();
+  ctx.font = `${fieldConfig.fontSize}px "Oswald", sans-serif`;
+  ctx.fillStyle = fieldConfig.color;
+  ctx.textBaseline = 'top';
+  ctx.textAlign = fieldConfig.align;
+
+  const lines = wrapCanvasText(ctx, value || '', fieldConfig.maxWidth).slice(0, fieldConfig.maxLines);
+
+  let drawX = fieldConfig.x;
+
+  lines.forEach((line, i) => {
+    ctx.fillText(line, drawX, fieldConfig.y + i * fieldConfig.lineHeight);
+  });
+
+  ctx.restore();
+}
+
+async function generateTicketCanvas(ticketData) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080;
+  canvas.height = 1920;
+
+  const ctx = canvas.getContext('2d');
+
+  await document.fonts.ready;
+  const template = await loadImage(TICKET_TEMPLATE_SRC);
+
+  ctx.drawImage(template, 0, 0, 1080, 1920);
+
+  Object.values(TICKET_FIELDS).forEach((field) => {
+    const value = ticketData[field.valueKey] || '';
+    drawTicketField(ctx, field, value);
+  });
+
+  return canvas;
+}
+
+async function downloadGeneratedTicket(ticketData, fileName) {
+  const canvas = await generateTicketCanvas(ticketData);
+  const link = document.createElement('a');
+  link.download = fileName;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
 
     function renderEventRow(event) {
       const hint = event.mode === 'paid'
@@ -1908,7 +2286,6 @@ Adjunto mi comprobante de Yape.`;
       const errorBox = form.querySelector('.result-box.error');
       const okBox = form.querySelector('.result-box.ok');
       const previewWrap = form.querySelector('.ticket-preview-wrap');
-      const previewCard = form.querySelector('.ticket-preview-card');
       const previewName = form.querySelector('.ticket-preview-name');
       const downloadBtn = form.querySelector('.btn-secondary');
 
@@ -1953,10 +2330,33 @@ Adjunto mi comprobante de Yape.`;
 
           showBox(okBox, '<strong>Ticket gratuito generado.</strong><br>Tu ticket ya está listo para descarga.', 'ok');
 
-          const safeName = slugify(payload.fullName || 'invitado');
-          downloadBtn.onclick = async () => {
-            await downloadTicketCard(previewCard, `ticket-gratuito-${day.date.replace('/', '-')}-${safeName}.png`);
-          };
+const safeName = slugify(payload.fullName || 'invitado');
+
+const cleanTitles = selectedEvents
+  .map(ev => ev.title.replace(/<\/?[^>]+(>|$)/g, '').replace(/[“”"]/g, ''))
+  .join(' / ');
+
+const uniquePlacesArray = [...new Set(selectedEvents.map(ev => ev.place))];
+const freeCode = buildRandomCode('FREE');
+
+const ticketData = {
+  name: payload.fullName.toUpperCase(),
+  event: selectedEvents.length > 1 ? 'EVENTOS GRATUITOS DEL DÍA' : cleanTitles.toUpperCase(),
+  time: selectedEvents.length > 1 ? 'MÚLTIPLES' : selectedEvents[0].time,
+  place: uniquePlacesArray.length > 1 ? 'SEGÚN PROGRAMACIÓN' : uniquePlacesArray[0],
+  date: day.date,
+  city: day.city,
+  leftTag: 'EVENTO GRATUITO',
+  rightTag: 'LIBRE',
+  bottomCode: freeCode
+};
+
+downloadBtn.onclick = async () => {
+  await downloadGeneratedTicket(
+    ticketData,
+    `ticket-gratuito-${day.date.replace('/', '-')}-${safeName}.png`
+  );
+};
         } catch (error) {
           showBox(errorBox, error.message || 'Ocurrió un problema al generar el ticket.', 'error');
         } finally {
@@ -2022,6 +2422,24 @@ Adjunto mi comprobante de Yape.`;
           const code = result.registrationCode || buildRandomCode('CODIGO');
           waBtn.href = buildWhatsAppLink(payload, code);
           waWrap.style.display = 'flex';
+const paidTicketData = {
+  name: payload.fullName.toUpperCase(),
+  event: payload.eventTitle
+  .replace(/<\/?[^>]+(>|$)/g, '')
+  .replace(/[“”"]/g, '')
+  .toUpperCase(),
+  time: selectedEvent.time,
+  place: selectedEvent.place,
+  date: day.date,
+  city: day.city,
+  leftTag: 'ENTRADA PAGADA',
+  rightTag: payload.ticketCategory.toUpperCase(),
+  bottomCode: code
+};
+waBtn.dataset.ticket = JSON.stringify(paidTicketData);
+waBtn.dataset.code = code;
+waBtn.dataset.name = payload.fullName.toUpperCase();
+waBtn.dataset.event = paidTicketData.event;
 
           showBox(
             okBox,
